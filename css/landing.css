@@ -1,0 +1,10 @@
+/** CSS For landing page */
+
+div.body-container-wrap {
+  /*display: flex;
+  justify-content: center;*/
+}
+
+div.body-container-wrap h1 {
+  text-align: center;
+}
