@@ -3,8 +3,120 @@
 div.body-container-wrap {
   /*display: flex;
   justify-content: center;*/
+  /*flex-direction: column;*/
+  background-size: cover;
+  background-image: url('https://source.unsplash.com/zMV7sqlJNow');
 }
 
 div.body-container-wrap h1 {
-  text-align: center;
+  /*text-align: center;*/
+  /*height: 100%;*/
+  font-family: 'Libre Baskerville', sans-serif;
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+div.main-container {
+  flex-direction: column;
+}
+
+div.newuserbox-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+div.newuserbox-container form input {
+  background-color: rgba(255, 255, 255, 0.38);
+      padding: 10px;
+      border: 1px solid rgba(0, 0, 0, 0);
+      border-radius: 5px 0px 0px 5px;
+      font-size: 20px;
+      /* border: none; */
+      font-family: 'Roboto', sans-serif;
+      font-weight: lighter;
+      outline: none;
+      color: rgba(33, 33, 33, 0.7);
+}
+
+div.newuserbox-container form input::-webkit-input-placeholder {
+  color: rgba(33, 33, 33, 0.4);
+}
+
+div.newuserbox-container form {
+  display: flex;
+  flex-direction: column;
+  width: 310px;
+  transition: 0.5s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+
+div.newuserbox-container form a {
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+  opacity: 0;
+  transition: 0.5s ease-in-out;
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
+  text-decoration: none;
+  color: #6b6b6b;
+  margin-bottom: 5px;
+}
+
+div.newuserbox-container form a:hover{
+  color: grey;
+}
+
+div.newuserbox-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+div.newuserbox-container form:active {
+  box-shadow: 5px 5px solid black;
+}
+
+div.input-icon-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 0px 5px 5px 0px;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+
+div.input-icon-box:hover {
+  background-color: white;
+  transform: translateX(-5px);
+  /*transform: translateY(-10px);*/
+}
+
+div.input-icon-box i {
+  color: #687b96;
+}
+
+div.title-headings {
+  /*margin-top: 50px;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: 0.3s ease-in-out;
+}
+
+div.title-headings h1, div.title-headings p {
+  margin-top: 0;
+  color: #5d5d5d;
+}
+
+hr {
+  width: 80px;
+  color: white;
+  height: 0px;
+  border: 1px solid #7b7b7b;
 }

@@ -9,9 +9,9 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
         <!-- CSS -->
-        <link rel="stylesheet" href="./css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/landing.css">
+        <link rel="stylesheet" href="../css/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../css/login.css">
         <!-- FONTS -->
         <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Open+Sans:300,400|Roboto:200,300,400" rel="stylesheet">
         <!-- Scripts -->
@@ -19,7 +19,6 @@
         src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>
-        <script src="./js/landing.js"></script>
         <!-- <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script> -->
     </head>
     <body>
@@ -38,24 +37,17 @@
       <div class="body-container-wrap">
 
         <div class="main-container">
-          <div class="title-headings">
-            <h1 class="title">SplitABill</h1>
-            <p class="tagline">Split Bills <i>not</i> people.</p>
-            <hr nosade>
-          </div>
-          <div class="newuserbox-container">
-            <form action="">
-              <a class="account-exists">Already have an account?</a>
-              <div style="display: flex;">
-                <input name="name" placeholder="Name, please.">
-                <div class="input-icon-box" style=><i class="fa fa-arrow-right" aria-hidden="true"></i></div></form>
-              </div>
+          <div class="login-box-wrap">
+            <h2>Login to start Splitting.</h2>
+            <form action="../assets/authenticate.php" method="post">
+              <input placeholder="Username"></input>
+              <input type="password" placeholder="Password"></input>
+              <input type="submit">
             </form>
-            <!-- <a href="">I already have an account</a> -->
-          </div>
-
           </div>
         </div>
+
+    </div>
 
 
 
