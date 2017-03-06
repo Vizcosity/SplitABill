@@ -1,0 +1,19 @@
+div.bill-groups {
+  margin: 0;
+}
+
+div.main-container {
+  align-items: center;
+  flex-direction: column;
+}
+
+div.main-content-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+
+a.btn-floating {
+  align-self: flex-end;
+  margin-left: 20px;
+}
