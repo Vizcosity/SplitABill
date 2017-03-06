@@ -11,7 +11,9 @@ $(document).ready(function(){
     var password = formData[1].value;
 
     // Send off details to server and await authentication.
-    $.post('../modules/authenticate.php', {username: username, password: password}, function(result){
+    $.post('../modules/authenticate.php', {username: username, password: password}, function(response){
+
+      response = JSON.parse(response);
 
       if (!response.success) return incorrectDetailsHandler(response.reason);
 
