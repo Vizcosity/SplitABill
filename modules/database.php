@@ -38,7 +38,7 @@ class Database {
 	}
 
 	private function getConnection() {
-		$conn = new SQLite3('../database/list2done.db');
+		$conn = new SQLite3('../database/database.db');
 		return $conn;
 	}
 }

@@ -135,3 +135,9 @@ p {
   font-size: 15px;
   font-weight: 300;
 }
+  /* Error text styling */
+.error {
+  text-align: center;
+  color: #e74c3c;
+
+}
