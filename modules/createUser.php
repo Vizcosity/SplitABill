@@ -25,6 +25,13 @@ if (!isset($_POST['name']) ||
   !isset($_POST['email']))
   invalidationHandler("Please fill in all the fields.");
 
+// Check to see if the user does not already exist.
+$userQueryCheck = $db->prepare("SELECT * FROM users WHERE username=':username'");
+$userQueryCheck->bindValue(":username", $username, SQLITE3_TEXT);
+
+$userQueryResult = $userQueryCheck->execute()->fetchArray();
+
+if (!isset($userQueryResult['username'])) invalidationHandler("Username already exists.");
 
 // Prepare the SQL statement to add the user.
 $statement = $db->prepare("INSERT INTO users VALUES(NULL, ':username', NULL, ':name', ':email', ':password', ':salt', ':created_at');");
@@ -38,7 +45,11 @@ $statement->bindValue(':name', $name, SQLITE3_TEXT);
 $statement->bindValue(':email', $email, SQLITE3_TEXT);
 $statement->bindValue(':password', $password, SQLITE3_TEXT);
 $statement->bindValue(':salt', $salt, SQLITE3_INTEGER);
-$statement->bindValue(':created_at', $username, SQLITE3_TEXT);
+$statement->bindValue(':created_at', time(), SQLITE3_INTEGER);
+
+$statement->execute();
+
+if (!$noRedirect) return header("Location: ../pages/welcome.php");
 
 
 
