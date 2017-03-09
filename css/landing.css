@@ -4,8 +4,8 @@ div.body-container-wrap {
   /*display: flex;
   justify-content: center;*/
   /*flex-direction: column;*/
-  background-size: cover;
-  background-image: url('https://source.unsplash.com/zMV7sqlJNow');
+  /*background-size: cover;
+  background-image: url('https://source.unsplash.com/zMV7sqlJNow');*/
 }
 
 div.body-container-wrap h1 {
@@ -53,18 +53,17 @@ div.newuserbox-container form {
 div.newuserbox-container form a {
   text-decoration: none;
   cursor: pointer;
-  color: black;
   opacity: 0;
   transition: 0.5s ease-in-out;
   font-family: 'Roboto', sans-serif;
   font-weight: lighter;
   text-decoration: none;
-  color: #6b6b6b;
+  color: #d0d0d0;
   margin-bottom: 5px;
 }
 
 div.newuserbox-container form a:hover{
-  color: grey;
+  color: white;
 }
 
 div.newuserbox-container {
@@ -111,12 +110,13 @@ div.title-headings {
 
 div.title-headings h1, div.title-headings p {
   margin-top: 0;
-  color: #5d5d5d;
+  /*color: #5d5d5d;*/
+  color: white;
 }
 
 hr {
   width: 80px;
   color: white;
   height: 0px;
-  border: 1px solid #7b7b7b;
+  border: 1px solid rgba(255, 255, 255, 0.43);
 }

@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,9 +13,15 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
         <!-- CSS -->
+        <!-- Materialize -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
         <link rel="stylesheet" href="../css/font-awesome.min.css">
         <link rel="stylesheet" href="../css/main.css">
         <link rel="stylesheet" href="../css/addBill.css">
+
+          <!-- Materialize Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
         <!-- FONTS -->
         <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Open+Sans:300,400|Roboto:200,300,400" rel="stylesheet">
         <!-- Scripts -->
@@ -19,20 +29,13 @@
         src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
         <!-- <script src="../js/login.js"></script> -->
         <!-- <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script> -->
     </head>
     <body>
         <!-- <div class="header-container"> -->
-            <header>
-                <nav>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Login</a></li>
-                    </ul>
-                </nav>
-            </header>
+            <?php include("../modules/navbar.php"); ?>
         <!-- </div> -->
 
       <div class="body-container-wrap">

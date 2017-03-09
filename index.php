@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <html>
     <head>
         <meta charset="utf-8">
@@ -33,6 +37,10 @@
       <div class="body-container-wrap">
 
         <div class="main-container">
+          <div class="bg-image">
+            <div class="overwash"></div>
+          </div>
+
           <div class="title-headings">
             <h1 class="title">SplitABill</h1>
             <p class="tagline">Split Bills <i>not</i> people.</p>
@@ -54,9 +62,8 @@
 
 
 
-
         <!-- This is here to create empty space for the fixed footer beneath -->
-        <div class="transparent-fill-div"></div>
+        <!-- <div class="transparent-fill-div"></div> -->
 
         <footer class="wrapper">
             <h3>SplitABill @ Aaron Baw 2017</h3>

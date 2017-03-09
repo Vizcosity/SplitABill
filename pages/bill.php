@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -72,6 +76,7 @@
             </div>
 
           </div>
+          <div class="bg-image"></div>
         </div>
 
     </div>

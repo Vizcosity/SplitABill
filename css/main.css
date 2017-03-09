@@ -37,7 +37,7 @@ div.main-container {
   display: flex;
   justify-content: center;
   background-size: cover;
-  background-image: url('https://source.unsplash.com/zMV7sqlJNow');
+  background-image: url('http://www.wallpaperup.com/uploads/wallpapers/2012/09/16/15073/big_thumb_763a42a889a803701db274188a6fcef9.jpg');
 }
 
 nav {
@@ -80,7 +80,7 @@ nav ul li a {
 
 /** STRUCTURE: FOOTER */
 footer {
-  position: fixed;
+  /*position: fixed;*/
   z-index: -1;
   display: flex;
   justify-content: center;
@@ -97,19 +97,25 @@ footer {
     font-size: 17px;
   }
 
-div.transparent-fill-div {
+/*div.transparent-fill-div {
   height: 70px;
-}
+}*/
 
 /** BG */
 div.bg-image {
-  background-image: url('https://source.unsplash.com/URmkfvtK3Qw');
+  background-image: url('https://source.unsplash.com/zMV7sqlJNow');
   position: absolute;
   z-index: -1;
   height: 100%;
   width: 100%;
   background-size: cover;
   background-position: center center;
+}
+
+div.overwash {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(204, 204, 204, 0.32);
 }
 
 /* TEXT STLYING */

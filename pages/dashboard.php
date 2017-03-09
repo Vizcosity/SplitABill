@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -39,6 +43,14 @@
 
             <div class="main-content-wrap">
 
+              <div class="header-wrap">
+                <i class="material-icons">dashboard</i>
+                <?php
+                  echo "<p>Hi, ".$_SESSION['name'].". This is your dashboard.</p>";
+                ?>
+              </div>
+
+              <div class="bills-wrap">
               <h2>Bill Overview</h2>
               <div class="collection bill-groups">
                 <a href="#!" class="collection-item"><span class="badge">£23</span>Gas</a>
@@ -46,17 +58,35 @@
                 <a href="#!" class="collection-item"><span class="badge">£23</span>Water</a>
                 <a href="#!" class="collection-item"><span class="badge">£23</span>Groceries</a>
               </div>
-
-              <h2>Here are your bill groups.</h2>
-              <div class="collection bill-groups">
-                <a href="#!" class="collection-item"><span class="badge">1</span>Alan</a>
-                <a href="#!" class="collection-item"><span class="new badge">4</span>Alan</a>
-                <a href="#!" class="collection-item">Alan</a>
-                <a href="#!" class="collection-item"><span class="badge">14</span>Alan</a>
               </div>
 
+              <div class="groups-wrap">
+              <h2>Here are your bill groups.</h2>
+              <div class="collection bill-groups">
+                <!-- <a href="#!" class="collection-item"><span class="badge">1</span>Alan</a>
+                <a href="#!" class="collection-item"><span class="new badge">4</span>Alan</a>
+                <a href="#!" class="collection-item">Alan</a>
+                <a href="#!" class="collection-item"><span class="badge">14</span>Alan</a> -->
+                <?php
+                  include("../modules/dashboardFetch.php");
+                  $groups = fetchGroups($_SESSION['id']);
+                  echo $groups;
+                ?>
+              </div>
+            </div>
 
-              <a class="btn-floating btn-large waves-effect waves-light light-blue"><i class="material-icons">add</i></a>
+
+              <div class="fixed-action-btn toolbar">
+                  <a class="btn-floating btn-large blue accent-2">
+                    <i class="large material-icons">mode_edit</i>
+                  </a>
+                  <ul>
+                    <li class="waves-effect waves-light tooltipped" data-position="top" data-delay="50" data-tooltip="Add Bill"><a href="addBill.php"><i class="material-icons">attach_money</i></a></li>
+                    <li class="waves-effect waves-light tooltipped" data-position="top" data-delay="50" data-tooltip="Add Group"><a href="addGroup.php"><i class="material-icons">group_add</i></a></li>
+                    <li class="waves-effect waves-light tooltipped" data-position="top" data-delay="50" data-tooltip="Settings"><a href="#!"><i class="material-icons">settings</i></a></li>
+                  </ul>
+                </div>
+
             </div>
 
           </div>

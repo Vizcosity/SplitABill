@@ -9,3 +9,39 @@ div.main-content-wrap {
 div.main-content-wrap > form {
   max-width: 600px;
 }
+
+h2 {
+  color: white;
+}
+
+p.page-tagline {
+  color: white;
+}
+
+p {
+  color: white;
+}
+
+p.people-slider {
+  margin-bottom: 0;
+}
+
+p.unknown-notify {
+  margin-top: 0;
+  font-size: 13px;
+}
+
+div.success-container {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+div.success-container > svg {
+  transition: 0.3s ease-in-out;
+}
+
+div.group-icon-wrap {
+  height: 140px;
+  width: 140px;
+  fill: white;
+}

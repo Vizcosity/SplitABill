@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 
   // If the index page is currently loaded, the path references are slightly different as the rest of the pages are located in the 'pages' directory.
   if (!isset($indexPage)) $indexPage = false;
@@ -10,10 +10,15 @@
         <ul>
             <?php
 
+            $loginUrl = isset($_SESSION['id']) ? ($indexPage ? "modules/logout.php" : "../modules/logout.php") : ($indexPage ? "pages/login.php" : "login.php");
+
+            $style = (isset($_SESSION['id']) ? "style='color: #ea8282'" : "");
+
+
             echo '
             <li><a href="'.($indexPage ? "index.php" : "../index.php").'">Home</a></li>
-            <li><a href="'.($indexPage ? "pages/about.php" : "about.php").'">About</a></li>
-            <li><a href="'.($indexPage ? "pages/login.php" : "login.php").'">Login</a></li>
+            <li><a href="'.($indexPage ? "pages/dashboard.php" : "dashboard.php").'">Dashboard</a></li>
+            <li><a href="'.$loginUrl.'"'.$style.'>'.(isset($_SESSION['id']) ? "Logout" : "Login").'</a></li>
             ';
 
             ?>

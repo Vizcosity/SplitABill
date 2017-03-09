@@ -13,7 +13,7 @@ $(document).ready(function(){
     // Send off details to server and await authentication.
     $.post('../modules/authenticate.php', {username: username, password: password, noRedirect: true}, function(response){
 
-      console.log(response);
+      // console.log(response);
 
       response = JSON.parse(response);
 
