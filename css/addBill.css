@@ -4,6 +4,10 @@ div.main-container {
   align-items: center;
 }
 
+h1 {
+  font-size: 40px;
+}
+
 div.box-container {
   display: flex;
   flex-direction: column;
@@ -13,7 +17,7 @@ div.box-container {
   max-width: 400px;
   background-color: white;
   border-radius: 10px;
-  padding: 20px;
+  padding: 50px;
 }
 
 form {
@@ -23,19 +27,6 @@ form {
   display: flex;
   flex-direction: column;
 }
-
-/*form > input {
-  background-color: rgba(255, 255, 255, 0.38);
-      padding: 10px;
-      border: 1px solid rgba(0, 0, 0, 0);
-      border-radius: 5px 0px 0px 5px;
-      font-size: 20px;
-      font-family: 'Roboto', sans-serif;
-      font-weight: lighter;
-      outline: none;
-      color: rgba(33, 33, 33, 0.7);
-      margin-bottom: 10px;
-} */
 
 div.form-buttons-wrap {
   display: flex;

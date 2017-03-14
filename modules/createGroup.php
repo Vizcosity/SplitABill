@@ -30,6 +30,16 @@ $statement->bindValue(':description', $description, SQLITE3_TEXT);
 
 $statement->execute();
 
+// Get the id of the last group which was inserted into the table.
+$groupID = $db->lastRowId();
+
+// Once the group has been created, find the id of the group, and use it to add the user to the group in the usersInGroup table
+$groupStatement = $db->prepare("INSERT INTO usersInGroup VALUES(:userID, :groupID)");
+$groupStatement->bindValue(":userID", $_SESSION['id'], SQLITE3_INTEGER);
+$groupStatement->bindValue(":groupID", $groupID, SQLITE3_INTEGER);
+$groupStatement->execute();
+// Group and user pair should now be added to the usersInGroup table.
+
 if (!$noRedirect) return header("Location: ../pages/dashboard.php");
 
 // Need to collect the details of the user's new id, and return a successful response back to the client.

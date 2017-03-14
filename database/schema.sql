@@ -20,6 +20,12 @@ CREATE TABLE groups(
   description text
 );
 
+DROP TABLE usersInGroup;
+CREATE TABLE usersInGroup(
+  userID integer,
+  groupID integer
+);
+
 DROP TABLE bills;
 CREATE TABLE bills(
   id integer primary key

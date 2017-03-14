@@ -30,7 +30,7 @@
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
-        <!-- <script src="../js/login.js"></script> -->
+        <script src="../js/addBill.js"></script>
         <!-- <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script> -->
     </head>
     <body>
@@ -44,11 +44,27 @@
           <div class="box-container">
             <form action="../modules/createNewBill.php" method="post">
               <h1>Add a new Bill.</h1>
+              <div>
+                <select class="icons">
+                  <option value="" disabled selected>Add Bill to a group</option>
+                  <option value="" data-icon="https://cdn0.iconfinder.com/data/icons/users-android-l-lollipop-icon-pack/24/group-128.png" class="circle">example 1</option>
+                  <option value="" data-icon="https://cdn0.iconfinder.com/data/icons/users-android-l-lollipop-icon-pack/24/group-128.png" class="circle">example 2</option>
+                  <option value="" data-icon="https://cdn0.iconfinder.com/data/icons/users-android-l-lollipop-icon-pack/24/group-128.png" class="circle">example 1</option>
+                  <option value="no-group" data-icon="https://cdn0.iconfinder.com/data/icons/users-android-l-lollipop-icon-pack/24/user-128.png" class="circle">Seperate Bill (No Group)</option>
+                </select>
+                <label>Images in select</label>
+              </div>
               <input name="billName" type="text" placeholder="Bill Name"></input>
-              <input name="amount" type="number" placeholder="Amount to Pay"></input>
+              <?php
+                echo '<input type="hidden" name="userID" value="'.$_SESSION['id'].'">';
+              ?>
+              <div class="chips chips-autocomplete"></div>
               <input name="people" type="number" placeholder="Amount of People"></input>
-              <input type="checkbox" name="recurring" value="true" checked>Recurring bill?</input>
-              <input type="submit" value="Add"></input>
+              <p>
+                 <input type="checkbox" class="filled-in blue accent-1" id="filled-in-box" checked="checked" />
+                 <label for="filled-in-box">Recurring Bill?</label>
+              </p>
+              <input class="btn waves-effect waves-light blue accent-1" type="submit" value="Add"></input>
             </form>
           </div>
         </div>
