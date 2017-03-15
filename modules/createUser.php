@@ -34,7 +34,7 @@ $userQueryResult = $userQueryCheck->execute()->fetchArray();
 if (isset($userQueryResult['username'])) return invalidationHandler("Username already exists.");
 
 // Prepare the SQL statement to add the user.
-$statement = $db->prepare("INSERT INTO users VALUES(NULL, :username, NULL, :name, :email, :password, :salt, :created_at);");
+$statement = $db->prepare("INSERT INTO users VALUES(NULL, :username, NULL, :name, :email, :imageURL, :password, :salt, :created_at);");
 
 // Get the salt value based on the current date time.
 $salt = time();
@@ -44,6 +44,7 @@ $hashedPassword = sha1($password.$salt);
 
 // Bind the values for the statement.
 $statement->bindValue(':username', $username, SQLITE3_TEXT);
+$statement->bindValue(':imageURL', NULL, SQLITE3_TEXT);
 $statement->bindValue(':name', $name, SQLITE3_TEXT);
 $statement->bindValue(':email', $email, SQLITE3_TEXT);
 $statement->bindValue(':password', $hashedPassword, SQLITE3_TEXT);

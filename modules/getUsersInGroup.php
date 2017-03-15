@@ -17,8 +17,9 @@ $query = $query->execute();
 $index = 0;
 while ($row = $query->fetchArray()){
 
+  // echo $row['userID'];
 
-  $userInfo = $db->prepare("SELECT * FROM users WHERE id=:id");
+  $userInfo = $db->prepare("SELECT name, id, username FROM users WHERE id=:id");
   $userInfo->bindValue(":id", $row['userID'], SQLITE3_INTEGER);
   $userInfo = $userInfo->execute()->fetchArray();
 

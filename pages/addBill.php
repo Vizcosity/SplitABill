@@ -50,11 +50,11 @@
             <form action="../modules/createNewBill.php" method="post">
               <h1>Add a new Bill.</h1>
               <div>
-                <select class="group-select">
+                <select name="groupID" class="group-select">
                   <?php
 
                     // Grab the groups and safe info to a variable.
-                    $groups = getGroupsByUser(1);
+                    $groups = getGroupsByUser($_SESSION['id']);
 
                     // Render all the groups as list elements.
                     while($row = $groups->fetchArray()){
@@ -71,13 +71,10 @@
               <input name="billName" type="text" placeholder="Bill Name"></input>
 
               <!-- Extended input for description if needed -->
-              <div class="input-field">
-                    <textarea id="billDescriptionBox" class="materialize-textarea"></textarea>
-                    <label for="billDescriptionBox">Bill Description (Optional)</label>
-              </div>
+              <input name="billDesc" type="text" placeholder="Bill Description"></input>
 
               <div class="input-field">               <!-- <p>£</p> -->
-               <input id="icon_prefix" type="text" class="validate">
+               <input id="icon_prefix" name="billAmt" type="text" class="validate">
                <label for="icon_prefix">Bill Amount (£)</label>
              </div>
 
@@ -87,9 +84,9 @@
 
 
 
-              <input placeholder="Select due date" id="date" type="date" class="datepicker"></input>
+              <input name="billDate" placeholder="Select due date" id="date" type="date" class="datepicker"></input>
               <p>
-                 <input type="checkbox" class="filled-in blue accent-1" id="filled-in-box" checked="checked" />
+                 <input name="recurring" type="checkbox" class="filled-in blue accent-1" id="filled-in-box" checked="checked" />
                  <label for="filled-in-box">Recurring Bill?</label>
               </p>
               <input class="btn waves-effect waves-light blue accent-1" type="submit" value="Add"></input>

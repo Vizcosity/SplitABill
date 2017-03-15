@@ -18,7 +18,7 @@ $(document).ready(function(){
       noRedirect: true
     }, function(response){
 
-      // console.log(response);
+      console.log(response);
 
       response = JSON.parse(response);
 

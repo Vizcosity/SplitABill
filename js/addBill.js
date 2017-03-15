@@ -51,75 +51,58 @@ $(document).ready(function(){
 
   // When constructing the chips / users that can be selected, a Post request needs to be made which grabs the
   // elements of all the aquainted users of the current user.
+  var groups = getGroups();
+  var tagArray = [];
+  collectTagData(groups, tagArray, function(tags){
 
-    var groups = getGroups();
-    console.log(groups);
-    var tagArray = [];
-    collectTagData(groups, tagArray, function(tags){
+    // The tag objects have been created but need to be converted into 'autoCompleteTags';
+    var autoCompleteTags = [];
+    for (var i = 0; i < tags.length; i++){
+      autoCompleteTags[tags[i].name] = {
+        tag: tags[i].name,
+        image: '',
+        id: tags[i].id
+      };
+    }
 
-      console.log(tags);
+    console.log(autoCompleteTags);
 
-      // The tag objects have been created but need to be converted into 'autoCompleteTags';
-      var autoCompleteTags = [];
-      for (var i = 0; i < tags.length; i++){
-        autoCompleteTags[tags[i].name] = {
-          tag: tags[i].name,
-          image: '',
-          id: tags[i].id
-        };
-      }
+    // autoCompleteTags filled. Assign to the material chip autocomplete.
+    $('.chips-autocomplete').material_chip({
+      autocompleteData: autoCompleteTags
+    });
 
-      console.log(autoCompleteTags);
+  });
 
-      // autoCompleteTags filled. Assign to the material chip autocomplete.
-      $('.chips-autocomplete').material_chip({
-        autocompleteData: autoCompleteTags
-      });
+  // Handle form submission.
+  $('form').submit(function(event){
+    event.preventDefault();
+
+    var rawData = $(this).serializeArray();
+
+    var tagData = $('.chips-autocomplete').material_chip('data');
+
+    var data = {};
+
+    data['users'] = tagData;
+
+    for (var i = 0; i < rawData.length; i++){
+      data[rawData[i].name] = rawData[i].value;
+    };
+
+    // console.log(data);
+
+    // Once all information has been collected, send a post request.
+
+    $.post("../modules/createBill.php", data, function(response){
+
+      if (response) window.location="./dashboard.php";
+
+      // console.log(response);
 
     });
 
-
-    // Make post request to the server requesting the details of the users within a group that can be added, then
-    // constantly prefetch users that could be added when typing dynamically.
-    // getUsersInGroup(userID, function(users){
-    //
-    //   users = JSON.parse(users);
-    //
-    //   if (!users) return;
-    //
-    //   // Fill in the tag array.
-    //   var tagArray = [];
-    //   for (var i = 0; i < users.length; i++){
-    //     // console.log("Adding: " + users[i].name+" ["+users[i].username+"]");
-    //     tagArray[i] = {
-    //       tag: users[i].name+" ["+users[i].username+"]",
-    //       image: 'https://cdn0.iconfinder.com/data/icons/users-android-l-lollipop-icon-pack/24/user-128.png',
-    //       id: users[i].id
-    //     }
-    //   }
-    //     var autoCompleteTagData = {};
-    //     for (var i = 0; i < tagArray.length; i++){
-    //
-    //       autoCompleteTagData[tagArray[i].tag] = {
-    //         // Create a 'chip' object for every autocomplete suggestion.
-    //         tag: tagArray[i].tag,
-    //         image: 'https://cdn0.iconfinder.com/data/icons/users-android-l-lollipop-icon-pack/24/user-128.png',
-    //         id: users[i].id
-    //       }
-    //
-    //       autoCompleteTagData[tagArray[i].tag] = 'https://cdn0.iconfinder.com/data/icons/users-android-l-lollipop-icon-pack/24/user-128.png';
-    //
-    //     }
-    //
-    //     $('.chips-autocomplete').material_chip({
-    //       placeholder: "Add Person",
-    //       secondaryPlaceholder: "Select Group",
-    //       // data: tagArray,
-    //       autocompleteData: autoCompleteTagData
-    //
-    //     });
-    //
-    // });
+  })
 
 });
 
@@ -166,7 +149,6 @@ function collectTagData(groupArray, tagArray, callback){
       }
 
       // When completed, run collectTagData again recursively with the next group.
-
       collectTagData(groupArray, tagArray, callback);
 
   });

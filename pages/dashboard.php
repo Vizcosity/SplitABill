@@ -1,5 +1,10 @@
 <?php
 session_start();
+// 
+// error_reporting(E_ALL);
+// ini_set("display_errors", 1);
+
+include("../modules/dashboardFetch.php");
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +40,7 @@ session_start();
     <body>
         <!-- <div class="header-container"> -->
         <?php include("../modules/navbar.php"); ?>
+
         <!-- </div> -->
 
       <div class="body-container-wrap">
@@ -53,22 +59,16 @@ session_start();
               <div class="bills-wrap">
               <h2>Bill Overview</h2>
               <div class="collection bill-groups">
-                <a href="#!" class="collection-item"><span class="badge">£23</span>Gas</a>
-                <a href="#!" class="collection-item"><span class="badge">£23</span>Food</a>
-                <a href="#!" class="collection-item"><span class="badge">£23</span>Water</a>
-                <a href="#!" class="collection-item"><span class="badge">£23</span>Groceries</a>
+                <?php
+                  echo fetchBills($_SESSION['id']);
+                ?>
               </div>
               </div>
 
               <div class="groups-wrap">
               <h2>Here are your bill groups.</h2>
               <div class="collection bill-groups">
-                <!-- <a href="#!" class="collection-item"><span class="badge">1</span>Alan</a>
-                <a href="#!" class="collection-item"><span class="new badge">4</span>Alan</a>
-                <a href="#!" class="collection-item">Alan</a>
-                <a href="#!" class="collection-item"><span class="badge">14</span>Alan</a> -->
                 <?php
-                  include("../modules/dashboardFetch.php");
                   $groups = fetchGroups($_SESSION['id']);
                   echo $groups;
                 ?>

@@ -27,6 +27,13 @@ CREATE TABLE usersInGroup(
   groupID integer
 );
 
+DROP TABLE usersInBill;
+CREATE TABLE usersInBill(
+  userID integer,
+  billID integer,
+  selfCost integer
+);
+
 DROP TABLE bills;
 CREATE TABLE bills(
   id integer primary key
@@ -35,6 +42,5 @@ CREATE TABLE bills(
   description text,
   cost integer,
   owner_id integer,
-  group_id integer,
-  hasGroup boolean
+  group_id integer
 );

@@ -1,0 +1,50 @@
+
+div.main-container {
+  align-items: center;
+  flex-direction: column;
+}
+
+div.main-content-wrap {
+  width: 70%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  color: white;
+}
+
+div.header-wrap > i {
+  color: white;
+  font-size: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+div.header-wrap p {
+  color: white;
+  text-align: center;
+}
+
+div.group-header-wrap p {
+  color: white;
+  margin-top: 0;
+}
+
+
+div.generate-link-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+div.generate-link-wrap input {
+  margin-bottom: 5px;
+  margin-left: 15px;
+}
+
+#leave-button {
+  margin-top: 10px;
+}

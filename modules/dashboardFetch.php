@@ -37,4 +37,55 @@ function stringifyGroupItem($item){
   return '<a href="group.php?id='.$item['id'].'" class="collection-item"><span class="badge">'.$users.'/'.$item['size'].'</span>'.$item['name'].'</a>';
 }
 
+function stringifyBillItem($userID, $item){
+
+  // Need to get the specific cost for the user,
+  // need to get the amount of users for a specific bill.
+
+  $cost = getCostForUser($userID, $item['id']);
+
+  return '<a href="bill.php?id='.$item['id'].'" class="collection-item"><span class="badge">£'.$cost.'</span>'.$item['name'].'</a>';
+
+}
+
+function getUserCountForBill($billID){
+  global $db;
+
+  $query = $db->prepare("SELECT COUNT(*) FROM usersInBill WHERE billID=:billID");
+  $query->bindValue(":billID", $billID, SQLITE3_INTEGER);
+
+  return $query->execute();
+}
+
+function getCostForUser($userID, $billID){
+  global $db;
+
+  $query = $db->prepare("SELECT selfCost FROM usersInBill WHERE billID=:billID AND userID=:userID");
+  $query->bindValue(":billID", $billID, SQLITE3_INTEGER);
+  $query->bindValue(":userID", $userID, SQLITE3_INTEGER);
+
+  $query = $query->execute()->fetchArray();
+
+  return $query['selfCost'];
+}
+
+function fetchBills($userID){
+
+  global $db;
+
+  $statement = $db->prepare("SELECT * FROM bills WHERE id IN (SELECT billID FROM usersInBill WHERE userID=:userID)");
+  $statement->bindValue(":userID", $userID, SQLITE3_INTEGER);
+
+  $result = $statement->execute();
+
+  $output = "";
+
+  while($row = $result->fetchArray()){
+    $output = $output.stringifyBillItem($userID, $row);
+  }
+
+  return $output;
+
+}
+
 ?>
