@@ -1,0 +1,87 @@
+hr {
+  border: 1px solid white;
+  width: 10%;
+  opacity: 0.3;
+}
+
+/* Header styling */
+div.main-container {
+  align-items: center;
+  flex-direction: column;
+}
+
+div.main-content-wrap {
+  width: 70%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  color: white;
+}
+
+
+/* Header Icon */
+div.header-wrap > i {
+  color: white;
+  font-size: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+p.about-splitabill {
+  background-color: white;
+  color: #444444;
+  border-radius: 10px;
+  font-size: 15px;
+  padding: 20px;
+}
+
+p.welcome-msg {
+  color: white;
+  text-align: center;
+}
+
+a.enter  p {
+  color: white;
+  margin: 0;
+  margin-left: 5px;
+}
+
+
+
+div.enter-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+a.enter {
+  border: 1px solid white;
+  margin-top: 20px;
+  padding: 10px;
+  /*height: 50px;
+  width: 50px;*/
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+a.enter:hover {
+  background-color: rgba(0,0,0,0.2);
+  transform: scale(1.03);
+}
+
+div.enter-btn-container:hover {
+
+
+
+}

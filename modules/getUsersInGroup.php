@@ -26,6 +26,8 @@ while ($row = $query->fetchArray()){
   $index++;
 }
 
+if (!isset($outputTarray)) {echo false; return;}
+
 $output = json_encode($outputTarray);
 
 echo $output;

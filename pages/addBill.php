@@ -1,5 +1,10 @@
 <?php
   session_start();
+  include("../modules/getGroupsForUser.php");
+
+  // error_reporting(E_ALL);
+  // ini_set("display_errors", 1);
+
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +40,7 @@
     </head>
     <body>
         <!-- <div class="header-container"> -->
-            <?php include("../modules/navbar.php"); ?>
+        <?php include("../modules/navbar.php"); ?>
         <!-- </div> -->
 
       <div class="body-container-wrap">
@@ -45,21 +50,44 @@
             <form action="../modules/createNewBill.php" method="post">
               <h1>Add a new Bill.</h1>
               <div>
-                <select class="icons">
-                  <option value="" disabled selected>Add Bill to a group</option>
-                  <option value="" data-icon="https://cdn0.iconfinder.com/data/icons/users-android-l-lollipop-icon-pack/24/group-128.png" class="circle">example 1</option>
-                  <option value="" data-icon="https://cdn0.iconfinder.com/data/icons/users-android-l-lollipop-icon-pack/24/group-128.png" class="circle">example 2</option>
-                  <option value="" data-icon="https://cdn0.iconfinder.com/data/icons/users-android-l-lollipop-icon-pack/24/group-128.png" class="circle">example 1</option>
-                  <option value="no-group" data-icon="https://cdn0.iconfinder.com/data/icons/users-android-l-lollipop-icon-pack/24/user-128.png" class="circle">Seperate Bill (No Group)</option>
+                <select class="group-select">
+                  <?php
+
+                    // Grab the groups and safe info to a variable.
+                    $groups = getGroupsByUser(1);
+
+                    // Render all the groups as list elements.
+                    while($row = $groups->fetchArray()){
+                      echo '<option value="'.$row['id'].'" data-icon="'.$row['imageURL'].'" class="circle">'.$row['name'].'</option>';
+                    }
+
+                  ?>
+                  <option value="false" data-icon="https://cdn0.iconfinder.com/data/icons/users-android-l-lollipop-icon-pack/24/user-128.png" class="circle">Seperate Bill (No Group)</option>
                 </select>
                 <label>Images in select</label>
               </div>
+              <div class="chips chips-autocomplete"></div>
+
               <input name="billName" type="text" placeholder="Bill Name"></input>
+
+              <!-- Extended input for description if needed -->
+              <div class="input-field">
+                    <textarea id="billDescriptionBox" class="materialize-textarea"></textarea>
+                    <label for="billDescriptionBox">Bill Description (Optional)</label>
+              </div>
+
+              <div class="input-field">               <!-- <p>£</p> -->
+               <input id="icon_prefix" type="text" class="validate">
+               <label for="icon_prefix">Bill Amount (£)</label>
+             </div>
+
               <?php
                 echo '<input type="hidden" name="userID" value="'.$_SESSION['id'].'">';
               ?>
-              <div class="chips chips-autocomplete"></div>
-              <input name="people" type="number" placeholder="Amount of People"></input>
+
+
+
+              <input placeholder="Select due date" id="date" type="date" class="datepicker"></input>
               <p>
                  <input type="checkbox" class="filled-in blue accent-1" id="filled-in-box" checked="checked" />
                  <label for="filled-in-box">Recurring Bill?</label>

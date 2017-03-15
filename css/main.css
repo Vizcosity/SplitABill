@@ -147,3 +147,10 @@ p {
   color: #e74c3c;
 
 }
+
+
+/* Global Icon Styling*/
+i.enter-btn {
+  font-size: 30px;
+  color: white;
+}

@@ -102,7 +102,7 @@
                 <!-- <div class="people-slider"></div> -->
                 <p class="range-field">
                   Group size
-                  <input name="size" type="range" class="people-slider tooltipped" data-position="top" data-delay="50" data-tooltip="Slide all the way if you are not sure." min="0" max="20" />
+                  <input name="size" type="range" class="people-slider tooltipped" data-position="right" data-delay="50" data-tooltip="Slide all the way if you are not sure." min="0" max="20" />
                 </p>
                 <p class="unknown-notify"></p>
 

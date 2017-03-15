@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
@@ -52,12 +52,19 @@ $statement->bindValue(':created_at', $salt, SQLITE3_INTEGER);
 
 $statement->execute();
 
+$createdUserID = $db->lastRowId();
+
+// Once the user has been created, log them in automatically.
+// Set the sessionID and sesssionName
+$_SESSION['id'] = $createdUserID;
+$_SESSION['name'] = $name;
+
 if (!$noRedirect) return header("Location: ../pages/welcome.php");
 
 // Need to collect the details of the user's new id, and return a successful response back to the client.
 echo '{
   "success": true,
-  "id": "'.$db->lastRowId().'"
+  "id": "'.$createdUserID.'"
 }';
 
 // This function handles invalid requests. Takes in a message which is either sent back

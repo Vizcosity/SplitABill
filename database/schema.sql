@@ -5,6 +5,7 @@ CREATE TABLE users(
   group_id integer,
   name text,
   email varchar(50),
+  imageURL text,
   password varchar(25),
   salt integer,
   created_at datetime
