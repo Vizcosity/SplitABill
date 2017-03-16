@@ -43,6 +43,7 @@ CREATE TABLE bills(
   description text,
   cost integer,
   remaining integer,
+  paid boolean,
   owner_id integer,
   group_id integer
 );

@@ -126,4 +126,18 @@ function fetchBillsInGroup($groupID){
 
 }
 
+// Get metadeta / details used to print in the page about the group specified.
+function getGroupDetails($groupID){
+
+  global $db;
+
+  $statement = $db->prepare("SELECT * FROM groups WHERE id=:id");
+  $statement->bindValue(":id", $groupID, SQLITE3_INTEGER);
+
+  $statement = $statement->execute()->fetchArray();
+
+  return $statement;
+
+}
+
 ?>

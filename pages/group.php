@@ -50,9 +50,20 @@ include("../modules/groupFetch.php");
             <div class="main-content-wrap">
               <div class="header-wrap">
                 <i class="material-icons">group_work</i>
-                <?php
-                  echo "<p>Group Page.</p>";
-                ?>
+                <div class="text-heading">
+                <h2><?php
+                    // Save group details to a variable.
+                    $groupDetails = getGroupDetails($_GET['id']);
+                    echo $groupDetails['name'];
+                  ?>
+                </h2>
+                <p>
+                  <?php
+                    // Echo the remaining description for the desired group.
+                    echo $groupDetails['description'];
+                  ?>
+                </p>
+              </div>
               </div>
 
               <h2>Total Split:</h2>

@@ -22,12 +22,13 @@ $userID = $_SESSION['id'];
 //
 // echo $groupID;
 
-$statement = $db->prepare("INSERT INTO bills VALUES(NULL, :billName, :billDesc, :billAmt, :remaining, :userID, :groupID)");
+$statement = $db->prepare("INSERT INTO bills VALUES(NULL, :billName, :billDesc, :billAmt, :remaining, :paid, :userID, :groupID)");
 
 $statement->bindValue(":billName", $billName, SQLITE3_TEXT);
 $statement->bindValue(":billDesc", $billDesc, SQLITE3_TEXT);
 $statement->bindValue(":billAmt", $billAmt, SQLITE3_INTEGER);
 $statement->bindValue(":remaining", $billAmt, SQLITE3_INTEGER);
+$statement->bindValue(":paid", FALSE, SQLITE3_INTEGER);
 $statement->bindValue(":userID", $userID, SQLITE3_INTEGER);
 $statement->bindValue(":groupID", $groupID, SQLITE3_INTEGER);
 

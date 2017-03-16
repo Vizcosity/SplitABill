@@ -13,6 +13,8 @@ div.main-content-wrap {
   background-color: white;
   padding: 50px;
   border-radius: 10px;
+  transition: 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  opacity: 1;
 }
 
 div.header-wrap {
@@ -72,4 +74,19 @@ p.bill-total {
   margin-top: auto;
   margin-bottom: 8px;
   color: grey;
+}
+
+div.success-container {
+  margin-top: auto;
+  margin-bottom: auto;
+  /*z-index: -1;*/
+  position: absolute;
+}
+
+div.success-container > svg {
+  transition: 0.3s ease-in-out;
+}
+
+div.success-container p {
+  color: white;
 }

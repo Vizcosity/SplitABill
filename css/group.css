@@ -1,11 +1,12 @@
 
 body {
-  /*height: auto;*/
+  height: auto;
   min-height: 100%;
 }
 
 div.main-container {
   height: auto;
+  min-height: 100%;
   padding-top: 100px;
   padding-bottom: 20px;
   align-items: center;
@@ -21,6 +22,7 @@ div.main-content-wrap {
 
 div.body-container-wrap{
   height: auto;
+  min-height: 100%;
 }
 
 h2 {
@@ -36,7 +38,16 @@ div.header-wrap > i {
 
 div.header-wrap p {
   color: white;
-  text-align: center;
+}
+
+div.text-heading {
+  margin-left: 20px;
+}
+
+div.header-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 div.group-header-wrap p {

@@ -35,6 +35,12 @@
         src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>
+
+        <script
+        src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+
           <!-- Materialize -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
         <script src="../js/bill.js"></script>
@@ -46,7 +52,12 @@
 
       <div class="body-container-wrap">
 
-        <div class="main-container">
+        <div
+          data-id="<?php echo $billData['id'];  ?>"
+          data-userID="<?php echo $_SESSION['id']; ?>"
+          data-amtPaid="<?php echo $billData['selfCost']; ?>"
+          class="main-container"
+        >
 
           <div class="header-wrap">
             <i class="material-icons">attach_money</i>
@@ -69,7 +80,7 @@
 
               <p class="bill-total">
                 <!-- Show what the total bill isout of -->
-                <?php echo "/£".$billData['cost']; ?>
+                <?php echo "/£".$billData['remaining']; ?>
               </p>
 
               </div>
@@ -124,6 +135,21 @@
                 <a id="confirmPayment" class=" modal-action modal-close waves-effect waves-green btn-flat">Yes</a>
                 <a href="#!" class=" modal-action modal-close waves-effect waves-red btn-flat">No</a>
               </div>
+            </div>
+
+            <div class="success-container">
+              <?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
+              <svg style="display: none;" enable-background="new 0 0 128 128"
+                height="128px" id="Layer_1"
+                version="1.1"
+                viewBox="0 0 128 128"
+                width="128px"
+                xml:space="preserve"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <path d="M116.158,29.336l-4.975-4.975c-3.469-3.469-9.088-3.478-12.549-0.019L48.103,74.875L29.364,56.136  c-3.459-3.46-9.078-3.45-12.549,0.021l-4.974,4.974c-3.47,3.47-3.48,9.089-0.02,12.549L41.8,103.657  c1.741,1.741,4.026,2.602,6.31,2.588c2.279,0.011,4.559-0.852,6.297-2.59l61.771-61.771  C119.637,38.424,119.631,32.807,116.158,29.336z" fill="white"/>
+              </svg>
+              <p style="display: none;">Go to the <a href="dashboard.php" style="color:white; font-weight:500; cursor:pointer;">dashboard</a></p>
             </div>
 
           </div>

@@ -155,3 +155,10 @@ i.enter-btn {
   font-size: 30px;
   color: white;
 }
+
+/** Animations! */
+.bounceOutAnimation {
+  /** Assumes that the element already has transition easing etc.*/
+  transform: translateY(-100%);
+  opacity: 0 !important;
+}
