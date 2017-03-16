@@ -2,16 +2,32 @@
 // Grab the bills for a given group.
 // Grab the users within a given group.
 session_start();
-
+date_default_timezone_set("Europe/London");
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 include("database.php");
 $db = new Database();
 
-function getUsersInGroup($groupID){
 
-  // Grabs the users from the group, formats for HTML render and outputs as string.
+// Grabs the jointoken for a specified group of id passed into the function.
+function getJoinToken($groupID){
+
+  global $db;
+
+  $dbQuery = $db->prepare("SELECT joinToken FROM groups WHERE id=:groupID");
+  $dbQuery->bindValue(":groupID", $groupID, SQLITE3_INTEGER);
+
+  $dbQuery = $dbQuery->execute()->fetchArray();
+
+  return $dbQuery['joinToken'];
+
+}
+
+
+
+// Grabs the users from the group, formats for HTML render and outputs as string.
+function getUsersInGroup($groupID){
 
   $dbQuery = fetchUsersInGroup($groupID);
 
@@ -27,10 +43,20 @@ function getUsersInGroup($groupID){
 
 }
 
-function getBillsInGroup($groupID){
 
+// Grabs the users from the group, formats for HTML render and outputs as string.
+function getBillsInGroup($userID, $groupID){
 
-  
+  $dbQuery = fetchBillsInGroup($groupID);
+
+  $output = "";
+
+  while ($row = $dbQuery->fetchArray()){
+    $output = $output.stringifyBillItem($userID, $row);
+  }
+
+  return $output;
+
 }
 
 
@@ -66,7 +92,7 @@ function stringifyUserItem($userItem){
     <i class="material-icons circle blue accent-2">face</i>
     <span class="title">'.$userItem['name'].'</span>
     <p>('.$userItem['username'].')</p>
-    <p>Joined Since: '.$userItem['created_at'].'</p>
+    <p>Joined Since: '.date("d F Y", $userItem['created_at']).'</p>
     <a href="user.php?id='.$userItem['id'].'" class="secondary-content"><i class="material-icons">info_outline</i></a>
   </li>';
 
@@ -87,7 +113,7 @@ function fetchUsersInGroup($groupID){
 }
 
 // Grab the bills given a specific group.
-function fetchbillsInGroup($groupID){
+function fetchBillsInGroup($groupID){
 
   global $db;
 

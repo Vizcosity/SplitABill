@@ -90,15 +90,15 @@ $(document).ready(function(){
       data[rawData[i].name] = rawData[i].value;
     };
 
-    // console.log(data);
+    console.log(rawData);
 
     // Once all information has been collected, send a post request.
 
     $.post("../modules/createBill.php", data, function(response){
 
-      if (response) window.location="./dashboard.php";
+      // if (response) window.location="./dashboard.php";
 
-      // console.log(response);
+      console.log(response);
 
     });
 

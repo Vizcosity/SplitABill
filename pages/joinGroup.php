@@ -1,11 +1,12 @@
 <?php
-
 session_start();
-//
-// error_reporting(E_ALL);
-// ini_set("display_errors", 1);
 
-include("../modules/dashboardFetch.php");
+// include("../modules/groupJoinModule.php");
+
+// If get param set, redirect to join module with appended token.
+if (isset($_GET['token']))
+  header("Location: ../modules/groupJoinModule.php?token=".$_GET['token']);
+
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +14,7 @@ include("../modules/dashboardFetch.php");
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>SplitABill - Dashboard</title>
+        <title>SplitABill - Join Group</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -22,7 +23,7 @@ include("../modules/dashboardFetch.php");
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
         <link rel="stylesheet" href="../css/font-awesome.min.css">
         <link rel="stylesheet" href="../css/main.css">
-        <link rel="stylesheet" href="../css/dashboard.css">
+        <link rel="stylesheet" href="../css/joinGroup.css">
 
         <!-- FONTS -->
         <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Open+Sans:300,400|Roboto:200,300,400" rel="stylesheet">
@@ -36,7 +37,10 @@ include("../modules/dashboardFetch.php");
         crossorigin="anonymous"></script>
           <!-- Materialize -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
-        <script src="../js/dashboard.js"></script>
+
+        <!-- Clipboard js framework for copying join tokens to clipboard -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
+        <script src="../js/joinGroup.js"></script>
     </head>
     <body>
         <!-- <div class="header-container"> -->
@@ -51,42 +55,29 @@ include("../modules/dashboardFetch.php");
             <div class="main-content-wrap">
 
               <div class="header-wrap">
-                <i class="material-icons">dashboard</i>
+                <i class="material-icons">group_add</i>
+                <p>Join a group by adding a token or joining via link.</p>
+              </div>
+
+              <p style="color: red">
                 <?php
-                  echo "<p>Hi, ".$_SESSION['name'].". This is your dashboard.</p>";
+                  if (isset($_GET['message']))
+                    echo $_GET['message'];
                 ?>
-              </div>
+              </p>
 
-              <div class="bills-wrap">
-              <h2>Bill Overview</h2>
-              <div class="collection bill-groups">
-                <?php
-                  echo fetchBills($_SESSION['id']);
-                ?>
-              </div>
-              </div>
+              <div class="token-input-wrap">
+                <form action="../modules/groupJoinModule.php" method="post">
+                  <input name="token" id="tokenInput" style="padding: 10px;" type="text"></input>
+                  <?php
+                    echo '<input name="userID" value="'.$_SESSION['id'].'" type="hidden"></input>';
+                  ?>
+                  <div id="submit">
+                    <input class="btn btn-flat waves-effect blue accent-1" type="submit" value="Join"></input>
+                  </div>
+                </form>
 
-              <div class="groups-wrap">
-              <h2>Here are your bill groups.</h2>
-              <div class="collection bill-groups">
-                <?php
-                  $groups = fetchGroups($_SESSION['id']);
-                  echo $groups;
-                ?>
               </div>
-            </div>
-
-
-              <div class="fixed-action-btn toolbar">
-                  <a class="btn-floating btn-large blue accent-2">
-                    <i class="large material-icons">mode_edit</i>
-                  </a>
-                  <ul>
-                    <li class="waves-effect waves-light tooltipped" data-position="top" data-delay="50" data-tooltip="Add Bill"><a href="addBill.php"><i class="material-icons">attach_money</i></a></li>
-                    <li class="waves-effect waves-light tooltipped" data-position="top" data-delay="50" data-tooltip="Add Group"><a href="addGroup.php"><i class="material-icons">group_add</i></a></li>
-                    <li class="waves-effect waves-light tooltipped" data-position="top" data-delay="50" data-tooltip="Settings"><a href="#!"><i class="material-icons">settings</i></a></li>
-                  </ul>
-                </div>
 
             </div>
 

@@ -1,5 +1,13 @@
 <?php
   session_start();
+
+  include("../modules/billFetch.php");
+
+  // Check to see if the billID is set and that the user has access to it.
+  // If not, redirect to the user's dashboard.
+
+  // Grab the bill Data so that it can be inserted later on in the page.
+  $billData = fetchBillDetailsByID($_SESSION['id'], $_GET['id']);
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +28,7 @@
 
         <!-- FONTS -->
         <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Open+Sans:300,400|Roboto:200,300,400" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
         <!-- Scripts -->
         <script
@@ -32,51 +41,93 @@
     </head>
     <body>
         <!-- <div class="header-container"> -->
-            <header>
-                <nav>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Login</a></li>
-                    </ul>
-                </nav>
-            </header>
+            <?php include("../modules/navbar.php"); ?>
         <!-- </div> -->
 
       <div class="body-container-wrap">
 
         <div class="main-container">
 
+          <div class="header-wrap">
+            <i class="material-icons">attach_money</i>
+            <h2>
+              <?php echo $billData['name']; ?>
+            </h2>
+          </div>
+
             <div class="main-content-wrap">
+
+
 
               <p>Due:</p>
 
-              <h2 class="due-amount">£42.11</h2>
+              <div class="due-wrap">
+              <h2 class="due-amount">
+                <!-- Echo the bill amount from the details obtained earlier. -->
+                <?php echo "£".$billData['selfCost'];?>
+              </h2>
+
+              <p class="bill-total">
+                <!-- Show what the total bill isout of -->
+                <?php echo "/£".$billData['cost']; ?>
+              </p>
+
+              </div>
 
               <div class="members-wrap">
                 <p>Associated Members:</p>
-                <div class="chip">
+                <!-- <div class="chip">
                   <img src="https://www.rhinonetworks.com/sites/all/themes/twmshop/images/default_profile.jpg" alt="Contact Person">
                   Aaron
-                </div>
+                </div> -->
+                <?php
+                  echo getUsersInBill($_GET['id']);
+                ?>
               </div>
 
               <div class="desc-wrap">
                 <h2>Description</h2>
                 <p>
-                  This is the description for the Bill you need to pay.
+                  <?php echo $billData['description']; ?>
                 </p>
               </div>
 
               <div class="buttons-wrap">
-                <a class="waves-effect waves-light btn">Pay Now</a>
-                <a class="waves-effect waves-light btn">Deferr</a>
+                <a id="payNow" href="#payNowModal" class="waves-effect waves-light blue accent-1 btn btn-flat">Pay Now</a>
+                <a id="defer" class="waves-effect waves-light btn red lighten-1 btn-flat">Defer</a>
               </div>
 
             </div>
 
+            <!-- Modal confirmation box on PayNow click -->
+            <div id="payNowModal" class="modal">
+              <div class="modal-content">
+                <h4>Confirm Payment.</h4>
+                <p>Are you sure you would like to mark this bill as paid?</p>
+                <table>
+                  <thead>
+                    <tr>
+                      <th data-field="id">Bill</th>
+                      <th data-field="price">Amount to pay</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td><?php echo $billData['name']; ?></td>
+                      <td><?php echo "£".$billData['selfCost']; ?></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <a id="confirmPayment" class=" modal-action modal-close waves-effect waves-green btn-flat">Yes</a>
+                <a href="#!" class=" modal-action modal-close waves-effect waves-red btn-flat">No</a>
+              </div>
+            </div>
+
           </div>
-          <div class="bg-image"></div>
+          <!-- <div class="bg-image"></div> -->
         </div>
 
     </div>

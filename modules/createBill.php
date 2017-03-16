@@ -17,18 +17,23 @@ $billAmt = $_POST['billAmt'];
 $billDate = $_POST['billDate'];
 $recurring = isset($_POST['recurring']);
 $userID = $_SESSION['id'];
+//
+// echo var_dump($_POST).'\n';
+//
+// echo $groupID;
 
-$statement = $db->prepare("INSERT INTO bills VALUES(NULL, :billName, :billDesc, :billAmt, :userID, :groupID)");
+$statement = $db->prepare("INSERT INTO bills VALUES(NULL, :billName, :billDesc, :billAmt, :remaining, :userID, :groupID)");
 
 $statement->bindValue(":billName", $billName, SQLITE3_TEXT);
 $statement->bindValue(":billDesc", $billDesc, SQLITE3_TEXT);
 $statement->bindValue(":billAmt", $billAmt, SQLITE3_INTEGER);
+$statement->bindValue(":remaining", $billAmt, SQLITE3_INTEGER);
 $statement->bindValue(":userID", $userID, SQLITE3_INTEGER);
 $statement->bindValue(":groupID", $groupID, SQLITE3_INTEGER);
 
 $statement->execute();
 
-
+// echo $groupID;
 
 // Check to see if the user itself is contained within the userArray, and if not, add it.
 if (!containsUser($users, $userID)){
@@ -43,22 +48,31 @@ $selfCost = round(intval($billAmt) / count($users));
 // echo $selfCost."\n";
 // echo $billAmt."\n";
 // echo $selfCost;
+// echo buildSqlQuery($users, $db->lastRowId(), $selfCost);
+// // Now that the bill has been created, add to the usersInBill table.
+// $addUsersStatement = $db->prepare("INSERT INTO usersInBill VALUES (1, 47, 135737),  (1, 47, 135737),  (1, 47, 135737),  (2, 47, 135737),  (1, 47, 135737)");
+// $addUsersStatement->execute();
+addUsersIterativeInsertion($users, $db->lastRowId(), $selfCost);
 
-// Now that the bill has been created, add to the usersInBill table.
-$addUsersStatement = $db->prepare(buildSqlQuery($users, $db->lastRowId(), $selfCost));
-$addUsersStatement->execute();
-
-echo true;
+// echo true;
 
 function buildSqlQuery($userArray, $billID, $selfCost){
   $output = "INSERT INTO usersInBill VALUES";
   // echo var_dump($userArray);
   // echo $userArray[0]['id'];
   for ($i = 0; $i < count($userArray); $i++){
-    $output = $output." (".$userArray[$i]['id'].", ".$billID.", ".$selfCost.")";
+    $output = $output." (".$userArray[$i]['id'].", ".$billID.", ".$selfCost.")".($i != count($userArray) - 1 ? ", ": "");
   }
 
   return $output;
+
+}
+
+function addUsersIterativeInsertion($userArray, $billID, $selfCost){
+  global $db;
+  for ($i = 0; $i < count($userArray); $i++){
+    $output = $db->exec("INSERT INTO usersInBill VALUES(".$userArray[$i]['id'].", ".$billID.", ".$selfCost.")");
+  }
 
 }
 

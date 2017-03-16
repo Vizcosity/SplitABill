@@ -10,6 +10,16 @@ div.main-container {
 div.main-content-wrap {
   display: flex;
   flex-direction: column;
+  background-color: white;
+  padding: 50px;
+  border-radius: 10px;
+}
+
+div.header-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 
@@ -18,8 +28,48 @@ a.btn-floating {
   margin-left: 20px;
 }
 
+h2 {
+  color: white;
+}
+
+div.header-wrap i {
+  color: white;
+  font-size: 120px;
+}
+
+div.desc-wrap h2 {
+  color: #263238;
+}
 
 h2.due-amount {
   font-size: 50px;
   color: #263238;
+  margin: 0;
+}
+
+div.buttons-wrap {
+  width: 100%;
+  display: flex;
+}
+
+div.buttons-wrap a {
+  width: 100%;
+  margin: 5px;
+}
+
+/** Elements need to be arranged in the same row and the p element should be smaller and slightly faded.*/
+div.due-wrap{
+  display: flex;
+  flex-direction: row;
+}
+
+div.desc-wrap p {
+  max-width: 500px;
+  word-wrap: break-word;
+}
+
+p.bill-total {
+  margin-top: auto;
+  margin-bottom: 8px;
+  color: grey;
 }

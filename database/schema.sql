@@ -18,7 +18,8 @@ CREATE TABLE groups(
   name text,
   imageURL text,
   size integer,
-  description text
+  description text,
+  joinToken text
 );
 
 DROP TABLE usersInGroup;
@@ -41,6 +42,7 @@ CREATE TABLE bills(
   name text,
   description text,
   cost integer,
+  remaining integer,
   owner_id integer,
   group_id integer
 );

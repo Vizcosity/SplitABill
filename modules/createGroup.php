@@ -19,7 +19,7 @@ $description = $_POST['desc'];
 if (!isset($_POST['name'])) return invalidationHandler("Please enter a valid name for the group.");
 
 // Prepare the SQL statement to add the user.
-$statement = $db->prepare("INSERT INTO groups VALUES(NULL, :owner_id, :name, :image, :size, :description);");
+$statement = $db->prepare("INSERT INTO groups VALUES(NULL, :owner_id, :name, :image, :size, :description, :joinToken);");
 
 // Bind the values for the statement.
 $statement->bindValue(':owner_id', $_SESSION['id'], SQLITE3_INTEGER);
@@ -27,6 +27,7 @@ $statement->bindValue(':name', $name, SQLITE3_TEXT);
 $statement->bindValue(':image', $image, SQLITE3_TEXT);
 $statement->bindValue(':size', $size, SQLITE3_INTEGER);
 $statement->bindValue(':description', $description, SQLITE3_TEXT);
+$statement->bindValue(':joinToken', generateToken($_SESSION['id'], $name, time()), SQLITE3_TEXT);
 
 $statement->execute();
 
@@ -61,6 +62,13 @@ function invalidationHandler($message){
     } else {
       header("Location: ../pages/addGroupPage.php?message=".$message);
     }
+}
+
+// Generates a token used to join the group based on the user's id and the current date on which the group is being made.
+function generateToken($ownerID, $name, $date){
+  // This is accomplished by hashing the concatenation of a few unique identifiers of the group, then returning
+  // the last 20 characters.
+  return substr(sha1($ownerID.$name.$date), 20);
 }
 
 ?>

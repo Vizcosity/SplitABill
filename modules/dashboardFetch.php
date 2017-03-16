@@ -1,9 +1,9 @@
 <?php
 
 session_start();
-
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
+// 
+// error_reporting(E_ALL);
+// ini_set("display_errors", 1);
 
 include("database.php");
 $db = new Database();
@@ -16,7 +16,7 @@ function fetchGroups($id){
 
   global $db;
 
-  $query = $db->prepare("SELECT * FROM groups WHERE owner_id=:id");
+  $query = $db->prepare("SELECT * FROM groups WHERE id IN (SELECT groupID from usersInGroup WHERE userID=:id)");
   $query->bindValue(":id", $id, SQLITE3_INTEGER);
 
   $result = $query->execute();

@@ -32,6 +32,9 @@ include("../modules/groupFetch.php");
         crossorigin="anonymous"></script>
           <!-- Materialize -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+
+        <!-- Clipboard js framework for copying join tokens to clipboard -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
         <script src="../js/group.js"></script>
     </head>
     <body>
@@ -55,29 +58,7 @@ include("../modules/groupFetch.php");
               <h2>Total Split:</h2>
               <h2>Users In Group</h2>
               <ul class="collection">
-                <li class="collection-item avatar">
-                  <i class="material-icons circle blue accent-2">face</i>
-                  <span class="title">Aaron</span>
-                  <p>(That Boi)</p>
-                  <p>Joined Since: 12/01/17</p>
-                  <a href="#!" class="secondary-content"><i class="material-icons">info_outline</i></a>
-                </li>
-                <li class="collection-item avatar">
-                  <i class="material-icons circle blue accent-2">face</i>
-                  <span class="title">Title</span>
-                  <p>First Line <br>
-                    Second Line
-                  </p>
-                  <a href="#!" class="secondary-content"><i class="material-icons">info_outline</i></a>
-                </li>
-                <li class="collection-item avatar">
-                  <i class="material-icons circle blue accent-2">face</i>
-                  <span class="title">Title</span>
-                  <p>First Line <br>
-                    Second Line
-                  </p>
-                  <a href="#!" class="secondary-content"><i class="material-icons">info_outline</i></a>
-                </li>
+                <?php echo getUsersInGroup($_GET['id']); ?>
               </ul>
 
               <?php
@@ -90,10 +71,11 @@ include("../modules/groupFetch.php");
                 <p>These are the bills shared between your squad.</p>
               </div>
               <div class="collection group-bills">
+                <!-- <a href="#!" class="collection-item">Alvin</a>
                 <a href="#!" class="collection-item">Alvin</a>
                 <a href="#!" class="collection-item">Alvin</a>
-                <a href="#!" class="collection-item">Alvin</a>
-                <a href="#!" class="collection-item">Alvin</a>
+                <a href="#!" class="collection-item">Alvin</a> -->
+                <?php echo getBillsInGroup($_SESSION['id'], $_GET['id']); ?>
               </div>
 
               <!-- Group Util -->
@@ -102,8 +84,18 @@ include("../modules/groupFetch.php");
               </div>
 
               <div class="generate-link-wrap">
-                <a class="waves-effect blue accent-1 btn-flat">Generate Link</a>
-                <input placeholder="Click button to generate join link."></input>
+                <!-- <a class="waves-effect blue accent-1 btn-flat">Copy</a> -->
+                <!-- <input placeholder="Click button to generate join link."></input> -->
+                <div class="token-item">
+                  <p>Join Token: </p>
+                  <p id="rawToken" class="joinToken" data-clipboard-target="#rawToken"><?php echo getJoinToken($_GET['id']); ?></p>
+                  <p>Send this to a friend and ask them to enter it in the <a href="joinGroup.php">join group</a> page.</p>
+                </div>
+                <div class="token-item">
+                  <p>Join Link: </p>
+                  <p id="linkToken" class="joinToken" data-clipboard-target="#linkToken"><?php echo "http://cs139.dcs.warwick.ac.uk/~u1617781/cs139/SplitABill/pages/joinGroup.php?token=".getJoinToken($_GET['id']); ?></p>
+                  <p>Users who click this will be added directly to the group.</p>
+                </div>
               </div>
 
               <a id="leave-button" class="btn btn-flat waves-effect red lighten-1">Leave Group</a>

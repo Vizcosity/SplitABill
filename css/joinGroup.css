@@ -1,0 +1,65 @@
+
+div.main-container {
+  align-items: center;
+  flex-direction: column;
+}
+
+div.main-content-wrap {
+  width: 70%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  color: white;
+}
+
+div.header-wrap > i {
+  color: white;
+  font-size: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+div.header-wrap p {
+  color: white;
+  text-align: center;
+}
+
+/* Disable materialize form styling just for this page. */
+#tokenInput{
+    background-color: rgba(0,0,0,0.11);
+    background-color: rgba(0, 0, 0, 0.11);
+    /*font-weight: bold;*/
+    border-radius: 5px;
+    padding: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.63);
+    color: white; !important;
+    outline: none;
+    height: 3rem;
+    /*width: 100%;*/
+    font-size: 1rem;
+    margin: 0 0 20px 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 0.3s;
+    max-width: 500px;
+}
+
+#submit {
+  /*width: 150px;*/
+}
+
+div.token-input-wrap form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+input:active{
+  border-hover: 2px solid rgba(255, 255, 255, 0.63);
+}

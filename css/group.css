@@ -1,5 +1,13 @@
 
+body {
+  /*height: auto;*/
+  min-height: 100%;
+}
+
 div.main-container {
+  height: auto;
+  padding-top: 100px;
+  padding-bottom: 20px;
   align-items: center;
   flex-direction: column;
 }
@@ -9,6 +17,10 @@ div.main-content-wrap {
   max-width: 700px;
   display: flex;
   flex-direction: column;
+}
+
+div.body-container-wrap{
+  height: auto;
 }
 
 h2 {
@@ -35,9 +47,10 @@ div.group-header-wrap p {
 
 div.generate-link-wrap {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
 }
 
 div.generate-link-wrap input {
@@ -47,4 +60,35 @@ div.generate-link-wrap input {
 
 #leave-button {
   margin-top: 10px;
+}
+
+div.token-item {
+  width: 100%;
+}
+
+div.token-item p {
+  color: white;
+}
+
+p.joinToken {
+  text-align: center;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.11);
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.63);
+  color: white; !important;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  /*-webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;*/
+  word-wrap: break-word;
+}
+
+p.joinToken:hover {
+  transform: scale(1.02);
+  background-color: rgba(0, 0, 0, 0.2)
 }
