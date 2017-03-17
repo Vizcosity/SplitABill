@@ -47,3 +47,13 @@ CREATE TABLE bills(
   owner_id integer,
   group_id integer
 );
+
+DROP TABLE notifications;
+CREATE TABLE notifications(
+  id integer primary key AUTOINCREMENT,
+  msg text,
+  uID integer,
+  gID integer,
+  bID integer,
+  created datetime
+);

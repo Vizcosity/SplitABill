@@ -1,7 +1,12 @@
 <?php
+
+// session_save_path("/tmp");
+
 session_start();
 
 // include("../modules/groupJoinModule.php");
+
+include("../modules/database.php");
 
 // If get param set, redirect to join module with appended token.
 if (isset($_GET['token']))
@@ -62,7 +67,7 @@ if (isset($_GET['token']))
               <p style="color: red">
                 <?php
                   if (isset($_GET['message']))
-                    echo $_GET['message'];
+                    echo escape($_GET['message']);
                 ?>
               </p>
 

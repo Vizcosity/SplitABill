@@ -1,11 +1,16 @@
 <?php
+// session_save_path("/tmp");
 
 session_start();
 //
 // error_reporting(E_ALL);
 // ini_set("display_errors", 1);
 
+// If the session id is not set return to login.
+if (!isset($_SESSION['id'])) header("Location: login.php?message=Log in to view your dashboard.");
+
 include("../modules/dashboardFetch.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -53,9 +58,16 @@ include("../modules/dashboardFetch.php");
               <div class="header-wrap">
                 <i class="material-icons">dashboard</i>
                 <?php
-                  echo "<p>Hi, ".$_SESSION['name'].". This is your dashboard.</p>";
+                  echo "<p>Hi, ".escape($_SESSION['name']).". This is your dashboard.</p>";
                 ?>
               </div>
+
+              <p class="error" style="color:red;">
+                <?php
+                  if (isset($_GET['message']))
+                    echo escape($_GET['message']);
+                ?>
+              </p>
 
               <div class="bills-wrap">
               <h2>Bill Overview</h2>
@@ -84,7 +96,7 @@ include("../modules/dashboardFetch.php");
                   <ul>
                     <li class="waves-effect waves-light tooltipped" data-position="top" data-delay="50" data-tooltip="Add Bill"><a href="addBill.php"><i class="material-icons">attach_money</i></a></li>
                     <li class="waves-effect waves-light tooltipped" data-position="top" data-delay="50" data-tooltip="Add Group"><a href="addGroup.php"><i class="material-icons">group_add</i></a></li>
-                    <li class="waves-effect waves-light tooltipped" data-position="top" data-delay="50" data-tooltip="Settings"><a href="#!"><i class="material-icons">settings</i></a></li>
+                    <li class="waves-effect waves-light tooltipped" data-position="top" data-delay="50" data-tooltip="Join Group"><a href="joinGroup.php"><i class="material-icons">add</i></a></li>
                   </ul>
                 </div>
 

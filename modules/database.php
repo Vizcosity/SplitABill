@@ -42,4 +42,11 @@ class Database {
 		return $conn;
 	}
 }
+
+
+  // Define function for escaping strings
+  // This is defined here because the database is included in every page and so it can propagate throughout.
+  function escape($string){
+    return htmlspecialchars($string, ENT_QUOTES, 'utf-8');
+  }
 ?>

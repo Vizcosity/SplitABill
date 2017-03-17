@@ -1,4 +1,6 @@
 <?php
+// session_save_path("/tmp");
+
   session_start();
   include("../modules/getGroupsForUser.php");
 
@@ -34,6 +36,10 @@
         src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>
+        <script
+        src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
         <script src="../js/addBill.js"></script>
         <!-- <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script> -->
@@ -49,6 +55,7 @@
           <div class="box-container">
             <form action="../modules/createNewBill.php" method="post">
               <h1>Add a new Bill.</h1>
+              <p class="error" style="color:red;"></p>
               <div>
                 <select name="groupID" class="group-select">
                   <?php
@@ -58,7 +65,7 @@
 
                     // Render all the groups as list elements.
                     while($row = $groups->fetchArray()){
-                      echo '<option value="'.$row['id'].'" data-icon="'.$row['imageURL'].'" class="circle">'.$row['name'].'</option>';
+                      echo '<option value="'.$row['id'].'" data-icon="'.escape($row['imageURL']).'" class="circle">'.escape($row['name']).'</option>';
                     }
 
                   ?>
@@ -74,7 +81,7 @@
               <input name="billDesc" type="text" placeholder="Bill Description"></input>
 
               <div class="input-field">               <!-- <p>£</p> -->
-               <input id="icon_prefix" name="billAmt" type="text" class="validate">
+               <input id="icon_prefix" name="billAmt" type="number" class="validate">
                <label for="icon_prefix">Bill Amount (£)</label>
              </div>
 
@@ -89,7 +96,7 @@
                  <input name="recurring" type="checkbox" class="filled-in blue accent-1" id="filled-in-box" checked="checked" />
                  <label for="filled-in-box">Recurring Bill?</label>
               </p>
-              <input class="btn waves-effect waves-light blue accent-1" type="submit" value="Add"></input>
+              <input class="btn" type="submit" value="Add"></input>
             </form>
           </div>
         </div>

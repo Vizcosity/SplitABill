@@ -1,8 +1,11 @@
-<?php session_start();
+<?php
+// session_save_path("/tmp");
+
+ session_start();
 
 // This module grabs all the groups that a particular user is a part of.
 // First grabs the ID of associated groups, then collects full information for each group.
-// 
+//
 // error_reporting(E_ALL);
 // ini_set("display_errors", 1);
 

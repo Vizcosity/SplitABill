@@ -1,10 +1,17 @@
-<?php session_start();
+<?php
+
+// session_save_path("/tmp");
+
+session_start();
 
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 include("database.php");
 $db = new Database();
+
+// Notification module.
+include("notificationHandler.php");
 
 $noRedirect = isset($_POST['noRedirect']);
 
@@ -40,6 +47,9 @@ $groupStatement->bindValue(":userID", $_SESSION['id'], SQLITE3_INTEGER);
 $groupStatement->bindValue(":groupID", $groupID, SQLITE3_INTEGER);
 $groupStatement->execute();
 // Group and user pair should now be added to the usersInGroup table.
+
+// Create a notification to notify user that they have successfully created a group.
+createUserNotification($_SESSION['id'], "<strong>You</strong> created group: ".escape($name));
 
 if (!$noRedirect) return header("Location: ../pages/dashboard.php");
 

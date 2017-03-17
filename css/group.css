@@ -1,6 +1,6 @@
 
 body {
-  height: auto;
+  /*height: auto;*/
   min-height: 100%;
 }
 
@@ -21,7 +21,7 @@ div.main-content-wrap {
 }
 
 div.body-container-wrap{
-  height: auto;
+  height: auto !important;
   min-height: 100%;
 }
 

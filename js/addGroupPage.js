@@ -48,7 +48,7 @@ $(document).ready(function(){
 
     $.post("../modules/createGroup.php", formData, function(response){
 
-      // console.log(response);
+      console.log(response);
 
       response = JSON.parse(response);
 

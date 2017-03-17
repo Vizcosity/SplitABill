@@ -65,7 +65,7 @@ $(document).ready(function(){
       };
     }
 
-    console.log(autoCompleteTags);
+    // console.log(autoCompleteTags);
 
     // autoCompleteTags filled. Assign to the material chip autocomplete.
     $('.chips-autocomplete').material_chip({
@@ -90,15 +90,24 @@ $(document).ready(function(){
       data[rawData[i].name] = rawData[i].value;
     };
 
-    console.log(rawData);
+    console.log(tagData);
 
     // Once all information has been collected, send a post request.
 
     $.post("../modules/createBill.php", data, function(response){
+      var original = response;
+      try {
+        response = JSON.parse(response);
+      } catch(e){
+        console.log("Error parsing JSON. " + e);
+        alert("PHP seems to be moody.");
+      }
 
-      // if (response) window.location="./dashboard.php";
+      console.log(original);
+      if (response && !response.success) return invalidationHandler(response.reason);
 
-      console.log(response);
+      if (response && response.success) window.location="./dashboard.php";
+
 
     });
 
@@ -160,4 +169,10 @@ function Tag(name, image, id){
   this.name = name;
   this.image = image;
   this.id = id;
+}
+
+//Invalidation handler.
+function invalidationHandler(message){
+  $('p.error').text(message);
+  $('div.box-container').effect('shake');
 }

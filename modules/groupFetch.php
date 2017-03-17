@@ -1,14 +1,17 @@
 <?php
 // Grab the bills for a given group.
 // Grab the users within a given group.
+// session_save_path("/tmp");
+
 session_start();
 date_default_timezone_set("Europe/London");
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-include("database.php");
-$db = new Database();
-
+if (!isset($db)){
+  include("database.php");
+  $db = new Database();
+}
 
 // Grabs the jointoken for a specified group of id passed into the function.
 function getJoinToken($groupID){
@@ -67,7 +70,7 @@ function stringifyBillItem($userID, $item){
 
   $cost = getCostForUser($userID, $item['id']);
 
-  return '<a href="bill.php?id='.$item['id'].'" class="collection-item"><span class="badge">£'.$cost.'</span>'.$item['name'].'</a>';
+  return '<a href="bill.php?id='.$item['id'].'" class="collection-item"><span class="badge">£'.$cost.'</span>'.escape($item['name']).'</a>';
 
 }
 
@@ -80,6 +83,8 @@ function getCostForUser($userID, $billID){
 
   $query = $query->execute()->fetchArray();
 
+  if (!isset($query['selfCost'])) return 0;
+
   return $query['selfCost'];
 }
 
@@ -90,8 +95,8 @@ function stringifyUserItem($userItem){
 
   '<li class="collection-item avatar">
     <i class="material-icons circle blue accent-2">face</i>
-    <span class="title">'.$userItem['name'].'</span>
-    <p>('.$userItem['username'].')</p>
+    <span class="title">'.escape($userItem['name']).'</span>
+    <p>('.escape($userItem['username']).')</p>
     <p>Joined Since: '.date("d F Y", $userItem['created_at']).'</p>
     <a href="user.php?id='.$userItem['id'].'" class="secondary-content"><i class="material-icons">info_outline</i></a>
   </li>';

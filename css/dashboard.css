@@ -4,6 +4,10 @@ body {
 
 }
 
+div.body-container-wrap{
+  min-height: 100%;
+}
+
 div.bill-groups {
   margin: 0;
 }

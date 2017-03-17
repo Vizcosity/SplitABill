@@ -1,5 +1,12 @@
 <?php
+
+// session_save_path("/tmp");
+
   session_start();
+
+  // Include the database for access to the string escape function.
+  include("../modules/database.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +25,8 @@
         <link rel="stylesheet" href="../css/register.css">
         <!-- FONTS -->
         <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Open+Sans:300,400|Roboto:200,300,400" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
         <!-- Scripts -->
         <script
         src="https://code.jquery.com/jquery-2.2.4.min.js"
@@ -44,7 +53,7 @@
             <form action="../modules/createUser.php" method="post">
 
               <p class="error">
-                <?php echo $_GET['message']; ?>
+                <?php echo escape($_GET['message']); ?>
               </p>
 
               <input name="name" placeholder="Enter a friendly name"></input>

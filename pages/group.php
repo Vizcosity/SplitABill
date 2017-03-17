@@ -1,5 +1,13 @@
 <?php
+// session_save_path("/tmp");
+
 session_start();
+
+// Import security module.
+require("../modules/security.php");
+
+if (!hasGroupAccess($_SESSION['id'], $_GET['id']))
+  return header("Location: dashboard.php?message=You do not have acccess to this group.");
 
 include("../modules/groupFetch.php");
 ?>
@@ -54,13 +62,13 @@ include("../modules/groupFetch.php");
                 <h2><?php
                     // Save group details to a variable.
                     $groupDetails = getGroupDetails($_GET['id']);
-                    echo $groupDetails['name'];
+                    echo escape($groupDetails['name']);
                   ?>
                 </h2>
                 <p>
                   <?php
                     // Echo the remaining description for the desired group.
-                    echo $groupDetails['description'];
+                    echo escape($groupDetails['description']);
                   ?>
                 </p>
               </div>

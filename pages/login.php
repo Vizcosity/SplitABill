@@ -1,5 +1,9 @@
 <?php
+// session_save_path("/tmp");
+
   session_start();
+
+  include("../modules/database.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,6 +21,8 @@
         <link rel="stylesheet" href="../css/login.css">
         <!-- FONTS -->
         <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Open+Sans:300,400|Roboto:200,300,400" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
         <!-- Scripts -->
         <script
         src="https://code.jquery.com/jquery-2.2.4.min.js"
@@ -48,6 +54,9 @@
                 <?php
                   if ($_GET['fail'])
                     echo "Incorrect username or password.";
+
+                  if ($_GET['message'])
+                    echo escape($_GET['message']);
                 ?>
               </p>
               <input name="username" placeholder="Username"></input>

@@ -1,7 +1,17 @@
 <?php
+
+// session_save_path("/tmp");
+
   session_start();
 
   include("../modules/billFetch.php");
+
+  include("../modules/security.php");
+
+  if (!hasBillAccess($_SESSION['id'], $_GET['id']))
+    return header("Location: dashboard.php?message=You do not have access to this bill.");
+
+  // Check to see if the user has access to this bill page and redirect accordingly.
 
   // Check to see if the billID is set and that the user has access to it.
   // If not, redirect to the user's dashboard.
@@ -62,7 +72,7 @@
           <div class="header-wrap">
             <i class="material-icons">attach_money</i>
             <h2>
-              <?php echo $billData['name']; ?>
+              <?php echo escape($billData['name']); ?>
             </h2>
           </div>
 
@@ -73,15 +83,32 @@
               <p>Due:</p>
 
               <div class="due-wrap">
-              <h2 class="due-amount">
-                <!-- Echo the bill amount from the details obtained earlier. -->
-                <?php echo "£".$billData['selfCost'];?>
-              </h2>
 
-              <p class="bill-total">
-                <!-- Show what the total bill isout of -->
-                <?php echo "/£".$billData['remaining']; ?>
-              </p>
+                <?php
+                // If bill unpaid, show due amount.
+                if ($billData['paid'] == 0)
+                  echo '<h2 class="due-amount">
+                      <!-- Echo the bill amount from the details obtained earlier. -->
+                      £'.($billData['selfCost'] == NULL ? 0 : $billData['selfCost']).'
+                      </h2>
+                      <p class="bill-total">
+                      <!-- Show what the total bill isout of -->
+                      /£'.$billData['remaining'].($billData['selfCost'] == NULL ? " [Awaiting Others]" : "").
+                    '</p>';
+                else
+                  echo '<h2 class="due-amount" style="color:green">
+                      <!-- Echo the bill amount from the details obtained earlier. -->
+                      <strike>£'.($billData['cost'] == NULL ? 0 : $billData['cost']).'</strike>
+                      </h2>
+                      <p class="bill-total">
+                      <!-- Show what the total bill is out of -->
+                      /Bill Paid.
+                    </p>';
+
+
+
+                ?>
+
 
               </div>
 
@@ -99,13 +126,13 @@
               <div class="desc-wrap">
                 <h2>Description</h2>
                 <p>
-                  <?php echo $billData['description']; ?>
+                  <?php echo escape($billData['description']); ?>
                 </p>
               </div>
 
               <div class="buttons-wrap">
                 <a id="payNow" href="#payNowModal" class="waves-effect waves-light blue accent-1 btn btn-flat">Pay Now</a>
-                <a id="defer" class="waves-effect waves-light btn red lighten-1 btn-flat">Defer</a>
+                <!-- <a id="defer" class="waves-effect waves-light btn red lighten-1 btn-flat">Defer</a> -->
               </div>
 
             </div>

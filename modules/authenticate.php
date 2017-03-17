@@ -1,4 +1,7 @@
-<?php session_start();
+<?php
+
+// session_save_path("/tmp");
+session_start();
 
 error_reporting(E_ALL);
 ini_set("display_errors", 1);

@@ -1,5 +1,12 @@
 <?php
+
+// session_save_path("/tmp");
+
 session_start();
+
+// Include database for escape function.
+include("../modules/database.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +53,7 @@ session_start();
               <div class="header-wrap">
                 <i class="material-icons">new_releases</i>
                 <?php
-                  echo "<p class='welcome-msg'>Hi, ".$_SESSION['name'].". Welcome to SplitABill.</p>";
+                  echo "<p class='welcome-msg'>Hi, ".escape($_SESSION['name']).". Welcome to SplitABill.</p>";
                 ?>
 
                 <p class="about-splitabill">

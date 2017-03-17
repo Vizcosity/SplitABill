@@ -8,6 +8,10 @@ ini_set("display_errors", 1);
 include("database.php");
 $db = new Database();
 
+// Import the notification module to create the notifications when users complete their bills.
+$noPostRequest = true;
+include("notificationHandler.php");
+
 $_POST['billID'];
 $_POST['userID'];
 $_POST['amtPaid'];
@@ -33,9 +37,16 @@ if ($_POST['amtPaid'] >= getRemainingBalance($_POST['billID'])) markBillAsPaid($
 
 updateRemaining($_POST['billID'], $_POST['amtPaid']);
 
-// Send a true for successful response.
+// Send a notification to alert people of the new bill status.
+if (getGroupByBillID($_POST['billID']) != -1) createGroupNotification(getGroupByBillID($_POST['billID']), "[".getGroupName(getGroupByBillID($_POST['billID']))."] <strong>".escape(getUserName($_POST['userID']))."</strong> has paid bill: ".escape(getBillName($_POST['billID'])));
+else {
+  $user = escape(getUserName($_POST['userID']));
+  createBillNotification($_POST['billID'], "<strong>".$user."</strong> has paid bill: ".escape(getBillName($_POST['billID'])));
+}
+
 echo true;
 
+// Marks the bill with passed ID has paid.
 function markBillAsPaid($billID){
 
   global $db;
@@ -80,6 +91,18 @@ function getRemainingBalance($billID){
   $statement = $statement->execute()->fetchArray();
 
   return $statement['remaining'];
+
+}
+
+function getGroupByBillID($billID){
+
+  global $db;
+
+  $statement = $db->prepare("SELECT group_id FROM bills where id=:id");
+  $statement->bindValue(":id", $billID, SQLITE3_INTEGER);
+  $statement = $statement->execute()->fetchArray();
+
+  return $statement['group_id'];
 
 }
 

@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="css/landing.css">
         <!-- FONTS -->
         <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Open+Sans:300,400|Roboto:200,300,400" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!-- Scripts -->
         <script
         src="https://code.jquery.com/jquery-2.2.4.min.js"

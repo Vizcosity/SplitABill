@@ -1,4 +1,5 @@
 <?php
+// session_save_path("/tmp");
 
 // echo "test";
 session_start();
@@ -83,7 +84,7 @@ function stringifyUserItem($userItem){
   // (they have not set a profile pic) use the default material icon.
 
   return (isset($userItem['imageURL']) ?
-  '<a href="./user.php?id='.$userItem['id'].'" class="chip"><img src="'.$userItem['imageURL'].'" alt="Contact Person">'.$userItem['name'].'</a>' :
+  '<a href="./user.php?id='.$userItem['id'].'" class="chip"><img src="'.escape($userItem['imageURL']).'" alt="Contact Person">'.escape($userItem['name']).'</a>' :
   '<a href="./user.php?id='.$userItem['id'].'" style="display:inline-flex; justify-content: center; align-items: center;" class="chip"><i style="margin-right: 5px;" class="material-icons">face</i>'.$userItem['name'].'</a>');
 }
 

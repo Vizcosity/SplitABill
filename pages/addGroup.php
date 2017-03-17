@@ -1,4 +1,5 @@
 <?php
+// session_save_path("/tmp");
   session_start();
 ?>
 
@@ -21,6 +22,7 @@
 
         <!-- FONTS -->
         <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Open+Sans:300,400|Roboto:200,300,400" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
         <!-- Scripts -->
         <script

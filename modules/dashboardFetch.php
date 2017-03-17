@@ -1,7 +1,8 @@
 <?php
+// session_save_path("/tmp");
 
 session_start();
-// 
+//
 // error_reporting(E_ALL);
 // ini_set("display_errors", 1);
 
@@ -34,7 +35,7 @@ function fetchGroups($id){
 // Takes in the group item details and returns the HTML markup.
 function stringifyGroupItem($item){
   $users = 0;
-  return '<a href="group.php?id='.$item['id'].'" class="collection-item"><span class="badge">'.$users.'/'.$item['size'].'</span>'.$item['name'].'</a>';
+  return '<a href="group.php?id='.$item['id'].'" class="collection-item"><span class="badge">'.$users.'/'.$item['size'].'</span>'.escape($item['name']).'</a>';
 }
 
 function stringifyBillItem($userID, $item){
@@ -44,7 +45,7 @@ function stringifyBillItem($userID, $item){
 
   $cost = getCostForUser($userID, $item['id']);
 
-  return '<a href="bill.php?id='.$item['id'].'" class="collection-item"><span class="badge">£'.$cost.'</span>'.$item['name'].'</a>';
+  return '<a href="bill.php?id='.$item['id'].'" class="collection-item"><span class="badge">£'.$cost.'</span>'.escape($item['name']).'</a>';
 
 }
 
